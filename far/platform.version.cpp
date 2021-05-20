@@ -89,21 +89,22 @@ namespace os::version
 	}
 
 
-	template<DWORD... Components>
+	/*template<DWORD... Components>
 	static unsigned long long condition_mask(DWORD const Operation)
 	{
 		return (... | VerSetConditionMask(0, Components, Operation));
-	}
+	}*/
 
 	bool is_win10_build_or_later(DWORD const Build)
 	{
-		static const auto Result = [&]
+		return false;
+		/*static const auto Result = [&]
 		{
 			OSVERSIONINFOEXW osvi{ sizeof(osvi), HIBYTE(_WIN32_WINNT_WIN10), LOBYTE(_WIN32_WINNT_WIN10), Build };
 				const auto ConditionMask = condition_mask<VER_MAJORVERSION, VER_MINORVERSION, VER_BUILDNUMBER>(VER_GREATER_EQUAL);
 				return VerifyVersionInfo(&osvi, VER_MAJORVERSION | VER_MINORVERSION | VER_BUILDNUMBER, ConditionMask) != FALSE;
 		}();
 
-		return Result;
+		return Result;*/
 	}
 }

@@ -371,8 +371,8 @@ static void InitProfile(string &strProfilePath, string &strLocalProfilePath)
 		{
 			const auto GetShellProfilePath = [](int Idl)
 			{
-				wchar_t Buffer[MAX_PATH];
-				SHGetFolderPath(nullptr, Idl | (Global->Opt->ReadOnlyConfig? 0 : CSIDL_FLAG_CREATE), nullptr, SHGFP_TYPE_CURRENT, Buffer);
+				wchar_t Buffer[MAX_PATH]{};
+				imports.SHGetFolderPath(nullptr, Idl | (Global->Opt->ReadOnlyConfig? 0 : CSIDL_FLAG_CREATE), nullptr, SHGFP_TYPE_CURRENT, Buffer);
 				return path::join(Buffer, L"Far Manager"sv, L"Profile"sv);
 			};
 

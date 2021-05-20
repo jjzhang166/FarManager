@@ -167,7 +167,7 @@ void taskbar::flash()
 		return;
 
 	FLASHWINFO FlashInfo{sizeof(FlashInfo), ConsoleWindow, FLASHW_ALL | FLASHW_TIMERNOFG, 5, 0};
-	FlashWindowEx(&FlashInfo);
+	//FlashWindowEx(&FlashInfo);
 }
 
 

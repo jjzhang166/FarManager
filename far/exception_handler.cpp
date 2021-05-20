@@ -265,7 +265,7 @@ static void read_modules(string& To, string_view const Eol)
 
 	for (;;)
 	{
-		if (!EnumProcessModules(GetCurrentProcess(), Data, Size, &Needed))
+		//if (!EnumProcessModules(GetCurrentProcess(), Data, Size, &Needed))
 			return;
 
 		if (Needed <= Size)

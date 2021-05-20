@@ -61,6 +61,7 @@ private:
 	DECLARE_MODULE(ntdll);
 	DECLARE_MODULE(kernel32);
 	DECLARE_MODULE(shell32);
+	DECLARE_MODULE(shfolder);
 	DECLARE_MODULE(user32);
 	DECLARE_MODULE(virtdisk);
 	DECLARE_MODULE(rstrtmgr);
@@ -169,6 +170,8 @@ public: const unique_function_pointer<name_##NAME, stub_##NAME> NAME{m_##MODULE}
 	DECLARE_IMPORT_FUNCTION(kernel32, WINAPI, int, CompareStringOrdinal, LPCWCH String1, int Count1, LPCWCH String2, int Count2, BOOL IgnoreCase);
 
 	DECLARE_IMPORT_FUNCTION(shell32, STDAPICALLTYPE, HRESULT, SHCreateAssociationRegistration, REFIID riid, void** ppv);
+
+	DECLARE_IMPORT_FUNCTION(shfolder, STDAPICALLTYPE, HRESULT, SHGetFolderPathW, HWND Hwnd, int Csidl, HANDLE Token, DWORD Flags, LPWSTR Path);
 
 	DECLARE_IMPORT_FUNCTION(user32, WINAPI, HPOWERNOTIFY, RegisterPowerSettingNotification, HANDLE hRecipient, LPCGUID PowerSettingGuid, DWORD Flags);
 	DECLARE_IMPORT_FUNCTION(user32, WINAPI, BOOL, UnregisterPowerSettingNotification, HPOWERNOTIFY Handle);

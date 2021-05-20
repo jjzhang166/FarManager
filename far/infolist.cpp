@@ -436,7 +436,7 @@ void InfoList::DisplayObject()
 	if (SectionState[ILSS_MEMORYINFO].Show)
 	{
 		MEMORYSTATUSEX ms={sizeof(ms)};
-		if (GlobalMemoryStatusEx(&ms))
+		if (false)//GlobalMemoryStatusEx(&ms))
 		{
 			if (!ms.dwMemoryLoad)
 				ms.dwMemoryLoad=100-ToPercent(ms.ullAvailPhys+ms.ullAvailPageFile,ms.ullTotalPhys+ms.ullTotalPageFile);

@@ -36,7 +36,7 @@ endif
 HOOK MACRO name, size, args:VARARG
 	ifndef X64
 		@CatStr(name, Wrapper) proto stdcall args
-		@CatStr(__imp__, name, @, size) dd @CatStr(name, Wrapper)
+		@CatStr(__imp__, name, @, size) dq @CatStr(name, Wrapper)
 		public @CatStr(__imp__, name, @, size)
 	else
 		@CatStr(name, Wrapper) proto stdcall
@@ -59,6 +59,9 @@ HOOK QueryDepthSList                        ,  4, :dword
 HOOK GetNumaHighestNodeNumber               ,  4, :dword
 HOOK GetLogicalProcessorInformation         ,  8, :dword, :dword
 HOOK SetThreadStackGuarantee                ,  4, :dword
+HOOK VerSetConditionMask                    , 16, :qword, :dword, :byte
+HOOK SetFilePointerEx                       , 20, :dword, :qword, :dword, :dword
+HOOK GetFileSizeEx                          ,  8, :dword, :dword
 endif
 HOOK InitializeCriticalSectionEx            , 12, :dword, :dword, :dword
 HOOK CompareStringEx                        , 36, :dword, :dword, :dword, :dword, :dword, :dword, :dword, :dword, :dword

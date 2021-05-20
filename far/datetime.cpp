@@ -62,7 +62,7 @@ static unsigned full_year(unsigned const Year)
 		return Year;
 
 	DWORD TwoDigitYearMax = 0;
-	if(!GetCalendarInfo(LOCALE_USER_DEFAULT, CAL_GREGORIAN, CAL_ITWODIGITYEARMAX|CAL_RETURN_NUMBER, nullptr, 0, &TwoDigitYearMax))
+	//if(!GetCalendarInfo(LOCALE_USER_DEFAULT, CAL_GREGORIAN, CAL_ITWODIGITYEARMAX|CAL_RETURN_NUMBER, nullptr, 0, &TwoDigitYearMax))
 	{
 		// Current default value (as of 4 Dec 2019 / Windows 10)
 		TwoDigitYearMax = 2049;

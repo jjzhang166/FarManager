@@ -216,7 +216,7 @@ namespace console_detail
 
 	HWND console::GetWindow() const
 	{
-		return GetConsoleWindow();
+		return {};// GetConsoleWindow();
 	}
 
 	bool console::GetSize(point& Size) const

@@ -59,7 +59,7 @@ void save_file_with_replace(string_view const FileName, os::fs::attributes const
 {
 	const auto IsFileExists = FileAttributes != INVALID_FILE_ATTRIBUTES;
 
-	const auto UseTemporaryFile = IsFileExists && [&]
+	const auto UseTemporaryFile = false;/* IsFileExists&& [&]
 	{
 		if (!Global->Opt->EdOpt.SaveSafely)
 			return false;
@@ -77,7 +77,7 @@ void save_file_with_replace(string_view const FileName, os::fs::attributes const
 			return false;
 
 		return true;
-	}();
+	}();*/
 
 	const auto OutFileName = UseTemporaryFile? MakeTempInSameDir(FileName) : string(FileName);
 	const auto NewAttributes = (IsFileExists? FileAttributes : 0) | FILE_ATTRIBUTE_ARCHIVE | ExtraAttributes;

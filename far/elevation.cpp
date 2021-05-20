@@ -355,8 +355,8 @@ static os::handle create_named_pipe(string_view const Name)
 
 static os::handle create_job()
 {
-	os::handle Job(CreateJobObject(nullptr, nullptr));
-	if (!Job)
+	os::handle Job/*(CreateJobObject(nullptr, nullptr))*/;
+	/*if (!Job)
 	{
 		LOGERROR(L"CreateJobObject: {}"sv, last_error());
 		return nullptr;
@@ -368,7 +368,7 @@ static os::handle create_job()
 	{
 		LOGERROR(L"SetInformationJobObject: {}"sv, last_error());
 		return nullptr;
-	}
+	}*/
 
 	return Job;
 }
@@ -445,8 +445,8 @@ bool elevation::Initialize()
 	if (!m_Job)
 		m_Job = create_job();
 
-	if (m_Job)
-		AssignProcessToJobObject(m_Job.native_handle(), m_Process.native_handle());
+	//if (m_Job)
+	//	AssignProcessToJobObject(m_Job.native_handle(), m_Process.native_handle());
 
 	if (!connect_pipe_to_process(m_Process, m_Pipe))
 	{

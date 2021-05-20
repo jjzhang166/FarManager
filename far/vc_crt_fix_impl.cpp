@@ -482,6 +482,65 @@ extern "C" int WINAPI LCMapStringExWrapper(LPCWSTR LocaleName, DWORD MapFlags, L
 	return Function(LocaleName, MapFlags, SrcStr, SrcCount, DestStr, DestCount, VersionInformation, Reserved, SortHandle);
 }
 
+extern "C" ULONGLONG WINAPI VerSetConditionMaskWrapper(ULONGLONG ConditionMask, ULONG TypeMask, UCHAR Condition)
+{
+	struct implementation
+	{
+		static ULONGLONG WINAPI VerSetConditionMask(ULONGLONG ConditionMask, ULONG TypeMask, UCHAR Condition)
+		{
+			return 0;
+		}
+	};
+
+	CREATE_FUNCTION_POINTER(modules::kernel32, VerSetConditionMask);
+	return Function(ConditionMask, TypeMask, Condition);
+}
+
+extern "C" BOOL WINAPI SetFilePointerExWrapper(HANDLE hFile, LARGE_INTEGER liDistanceToMove, PLARGE_INTEGER lpNewFilePointer, DWORD dwMoveMethod)
+{
+	struct implementation
+	{
+		static ULONGLONG WINAPI SetFilePointerEx(HANDLE hFile, LARGE_INTEGER liDistanceToMove, PLARGE_INTEGER lpNewFilePointer, DWORD dwMoveMethod)
+		{
+			auto NewPointer = SetFilePointer(hFile, liDistanceToMove.LowPart, &liDistanceToMove.HighPart, dwMoveMethod);
+
+			if (NewPointer == INVALID_SET_FILE_POINTER && GetLastError())
+				return false;
+
+			if (lpNewFilePointer)
+			{
+				lpNewFilePointer->LowPart = NewPointer;
+				lpNewFilePointer->HighPart = liDistanceToMove.HighPart;
+			}
+			return true;
+		}
+	};
+
+	CREATE_FUNCTION_POINTER(modules::kernel32, SetFilePointerEx);
+	return Function(hFile, liDistanceToMove, lpNewFilePointer, dwMoveMethod);
+
+}
+
+extern "C" BOOL WINAPI GetFileSizeExWrapper(HANDLE hFile, PLARGE_INTEGER lpFileSize)
+{
+	struct implementation
+	{
+		static BOOL WINAPI GetFileSizeEx(HANDLE hFile, PLARGE_INTEGER lpFileSize)
+		{
+			DWORD hi;
+			const auto Size = GetFileSize(hFile, &hi);
+			if (Size == INVALID_FILE_SIZE && GetLastError())
+				return false;
+
+			lpFileSize->LowPart = Size;
+			lpFileSize->HighPart = hi;
+			return true;
+		}
+	};
+
+	CREATE_FUNCTION_POINTER(modules::kernel32, GetFileSizeEx);
+	return Function(hFile, lpFileSize);
+}
 
 // disable VS2015 telemetry
 extern "C"

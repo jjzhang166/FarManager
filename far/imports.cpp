@@ -359,6 +359,13 @@ HRESULT STDAPICALLTYPE imports::stub_SHCreateAssociationRegistration(REFIID riid
 	return ERROR_CALL_NOT_IMPLEMENTED;
 }
 
+// shfolder
+HRESULT STDAPICALLTYPE imports::stub_SHGetFolderPathW(HWND Hwnd, int Csidl, HANDLE Token, DWORD Flags, LPWSTR Path)
+{
+	LOGWARNING(L"Stub call"sv);
+	return ERROR_CALL_NOT_IMPLEMENTED;
+}
+
 // user32
 BOOL WINAPI imports::stub_UnregisterPowerSettingNotification(HPOWERNOTIFY Handle)
 {

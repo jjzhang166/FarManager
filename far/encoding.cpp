@@ -89,7 +89,7 @@ private:
 			const auto cp = static_cast<unsigned>(std::wcstoul(cpNum, nullptr, 10));
 
 			CPINFOEX cpix;
-			if (!GetCPInfoEx(cp, 0, &cpix))
+			//if (!GetCPInfoEx(cp, 0, &cpix))
 			{
 				CPINFO cpi;
 				if (!GetCPInfo(cp, &cpi))
